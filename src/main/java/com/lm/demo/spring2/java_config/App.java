@@ -16,8 +16,8 @@ import com.lm.spring.services.CustomerSV;
 public class App {
 	private static ApplicationContext applicationContext;
 	public static void main(String[] args) {		
-		applicationContext = new ClassPathXmlApplicationContext("/auto/SpringCustomer.xml");
-		CustomerSV customerSV = (CustomerSV) applicationContext.getBean("test");
+		applicationContext = new ClassPathXmlApplicationContext("/javaConfig/SpringConfig.xml");
+		CustomerSV customerSV = (CustomerSV) applicationContext.getBean("myTest");
 		System.out.println(customerSV.toString());
 	}
 }
