@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+    
+    xmlns:p="http://www.springframework.org/schema/p">    
+
+    <!-- <bean id="fileNameGenerator" class="com.lm.demo.spring2.bean.FileNameGenerator">
+        <property name="name" value="lm" />
+        <property name="type" value="txt" />
+    </bean> -->
+    
+    <!-- 另一种方法（其实一样的） -->
+    <!-- <bean id="fileNameGenerator" class="com.lm.demo.spring2.bean.FileNameGenerator">
+        <property name="name">
+            <value>shiyanlou</value>
+        </property>
+        <property name="type">
+            <value>txt</value>
+        </property>
+    </bean> -->
+    
+    <!-- 此种方法需要在 bean 的配置文件 xml 中，加入p声明。-->
+    <bean id="fileNameGenerator" class="com.lm.demo.spring2.bean.FileNameGenerator"
+             p:name="lm" p:type="txt" /> 
+          
+    <!-- （不推荐）此种方法一旦 Person 被用在 Customer 下，也就不会被别的 Bean 引用。 -->       
+    <!-- <bean id="customer" class="com.lm.demo.spring2.innerBean.Customer">
+    	<property name="person" ref="personBean"></property>
+    </bean>
+    <bean id="personBean" class="com.lm.demo.spring2.innerBean.Person">
+    	<property name="name" value="lm"></property>
+    	<property name="address" value="nanjin"></property>
+    	<property name="age" value="23"></property>
+    </bean> -->
+    
+    <!-- 推荐 -->
+    <bean id="customer" class="com.lm.demo.spring2.innerBean.Customer">
+    	<property name="person">
+    		<bean class="com.lm.demo.spring2.innerBean.Person">
+    			<property name="name" value="lm"></property>
+    			<property name="address" value="nanjin"></property>
+    			<property name="age" value="23"></property>
+    		</bean>
+    	</property>
+    </bean>
+    
+    <!-- （不推荐）通过构造函数注入 -->
+    <bean id="customerBean" class="com.lm.demo.spring2.innerBean.Customer">
+    	<constructor-arg>
+    		<bean class="com.lm.demo.spring2.innerBean.Person">
+    			<property name="name" value="lm"></property>
+    			<property name="address" value="nanjin"></property>
+    			<property name="age" value="23"></property>
+    		</bean>
+    	</constructor-arg>
+    </bean>
+    
+    <!-- 无scope默认是singleton，而非原型模式 -->
+    <bean id="CustomerServiceSig" class="com.lm.demo.spring2.customer.services.CustomerServices" scope="singleton"/>
+    <bean id="CustomerServicePro" class="com.lm.demo.spring2.customer.services.CustomerServices" scope="prototype"/>
+</beans>

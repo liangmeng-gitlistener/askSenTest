@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">    
+
+    <!--bean的 id 最好首字母小写 -->
+    <!-- <bean id="customerSV" class="com.lm.spring.services.CustomerSV">
+    	<property name="customerDAO">
+    		<ref bean="customerDAO"/>
+    	</property>
+    </bean>
+    <bean id="customerDAO" class="com.lm.spring.dao.CustomerDAO">
+    	<property name="name">
+    		<value>lm</value>
+    	</property>
+    </bean> -->
+    <!-- <bean id="customerService" class="com.lm.spring.services.CustomerSV" autowire="autodetect" dependency-check="objects">
+ 	</bean>
+ 	<bean id="customerDAO" class="com.lm.spring.dao.CustomerDAO" /> -->
+ 	
+    <context:component-scan base-package="com.lm.spring">
+    	<context:exclude-filter type="annotation"	expression="com.lm.spring.dao.CustomerDAO2" />
+    </context:component-scan>
+    
+    <!-- 用“ filter ”自动扫描注册组件，这些组件只要匹配定义的“ regex ”的命名规则，Class 前就不需要用 @Component 进行注释。 -->
+    <!-- <context:component-scan base-package="com.lm.spring" >
+        <context:include-filter type="regex"	expression="com.lm.spring.dao.*DAO.*" />
+        <context:include-filter type="regex"	expression="com.lm.spring.services.*SV.*" />
+    </context:component-scan> -->
+    
+    
+</beans>
