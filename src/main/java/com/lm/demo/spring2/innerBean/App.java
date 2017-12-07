@@ -19,6 +19,5 @@ public class App {
 		Customer obj = (Customer) applicationContext.getBean("customerBean");
 		System.out.println(obj.toString());
 		System.out.println("3");
-		System.out.println("4");
 	}
 }
