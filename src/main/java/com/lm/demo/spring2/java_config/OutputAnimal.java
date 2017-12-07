@@ -8,8 +8,8 @@ public class OutputAnimal {
 	@Autowired
 	IAnimal iAnimal;
 
-	public void generateOutput() {
-		this.iAnimal.retName();
+	public String generateOutput() {
+		return this.iAnimal.retName();
 	}
 
 	public void setiOutputGenerator(IAnimal iAnimal) {
