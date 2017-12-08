@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
  * @since JDK 1.8.0_91
  */
 @Service
+//@Repository//(DAO层用的)
 public class Dog implements IAnimal {
 
 	@Override

@@ -24,6 +24,7 @@
  	
     <context:component-scan base-package="com.lm.demo.spring2.java_config">
     	<context:exclude-filter type="assignable"	expression="com.lm.demo.spring2.java_config.Cat" />
+    	<!-- <context:include-filter type="assignable"	expression="com.lm.demo.spring2.java_config.Cat" /> -->
     </context:component-scan>
     
     <!-- 用“ filter ”自动扫描注册组件，这些组件只要匹配定义的“ regex ”的命名规则，Class 前就不需要用 @Component 进行注释。 -->

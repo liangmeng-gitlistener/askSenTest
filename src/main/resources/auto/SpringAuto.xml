@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- autowire
+    no —— 默认情况下，不自动装配，通过 ref attribute手动设定。
+	byName —— 根据 Property 的 Name 自动装配，如果一个 bean 的 name ，和另一个 bean 中的 Property 的 name 相同，则自动装配这个 bean 到 Property 中。
+	byType —— 根据 Property 的数据类型（ Type ）自动装配，如果一个 bean 的数据类型，兼容另一个 bean 中 Property 的数据类型，则自动装配。
+	constructor —— 根据构造函数参数的数据类型，进行 byType 模式的自动装配。
+	autodetect —— 如果发现默认的构造函数，用 constructor 模式，否则，用 byType 模式。 
+	
+	项目中 autowire 结合 dependency-check 一起使用是一种很好的方法，这样能够确保属性总是可以成功注入。如下：
+ 	<bean id="customerService" class="com.shiyanlou.spring.services.CustomerService" autowire="autodetect" dependency-check="objects">
+ 	</bean>
+ 	<bean id="customerDAO" class="com.shiyanlou.spring.dao.CustomerDAO" />
+	-->
+	
+    <bean id="customerSV" class="com.lm.spring.auto.services.CustomerSV" autowire="byName">
+    	<!-- <property name="customerDAO">
+    		<ref bean="customerDAO"/>
+    	</property> -->
+    </bean>
+    <bean id="iCustomerDAO" class="com.lm.spring.auto.dao.CustomerDAO">
+    	<property name="name" value="test"></property>
+    </bean>
+</beans>
