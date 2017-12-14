@@ -12,8 +12,7 @@
     	<property name="url" value="http://www.baidu.com"></property>
     </bean>
     
-    <bean id="helloBeforeMethod" class="com.lm.aop.advice.HelloBeforeMethod">
-    </bean>
+    <bean id="helloBeforeMethod" class="com.lm.aop.advice.HelloBeforeMethod"></bean>
     <bean id="helloAfterMethod" class="com.lm.aop.advice.HelloAfterMethod"></bean>
     <bean id="afterThrowingMethod" class="com.lm.aop.advice.AfterThrowingMethod"></bean>
     
@@ -25,9 +24,24 @@
             <list>
                 <!-- <value>helloBeforeMethod</value>
                 <value>helloAfterMethod</value>
-                <value>afterThrowingMethod</value> -->
-                <value>aroundMethod</value>
+                <value>afterThrowingMethod</value>
+                <value>aroundMethod</value> -->
+                <value>customerAdvisor</value>
             </list>
         </property>
     </bean>
+    
+    <!-- 这种做法将 method 名字与具体的 advice 捆绑在一起，有悖于 Spring 松耦合理念 -->
+    <!-- <bean id="customerAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedName" value="printOutName" />
+        <property name="advice" ref="aroundMethod" />
+	</bean> -->
+	
+    <bean id="customerAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+    	<property name="pointcut" ref="customerPointcut"></property>
+    	<property name="advice" ref="aroundMethod"></property>
+    </bean>
+    <bean id="customerPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+        <property name="mappedName" value="printOutName" />
+	</bean>
 </beans>
