@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+	
+    <bean id="customerService" class="com.lm.aop.advice.CustomerService">
+    	<property name="name" value="lm"></property>
+    	<property name="url" value="http://www.baidu.com"></property>
+    </bean>
+    
+    <bean id="aroundMethod" class="com.lm.aop.advice.AroundMethod"></bean>
+    
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+        	<list>
+        		<value>*Service</value>
+        	</list>
+        </property>
+        <property name="interceptorNames">
+            <list>                
+                <value>customerAdvisor</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- 这种做法将 method 名字与具体的 advice 捆绑在一起，有悖于 Spring 松耦合理念 -->
+    <bean id="customerAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedName" value="printOutName" />
+        <property name="advice" ref="aroundMethod" />
+	</bean>
+</beans>
